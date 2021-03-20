@@ -1,10 +1,10 @@
-name: Rust
+name: RustCheck
 
 on:
   push:
-    branches: [ release ]
+    branches: [ release, develop ]
   pull_request:
-    branches: [ release ]
+    branches: [ release, develop ]
 
 env:
   CARGO_TERM_COLOR: always
