@@ -1,0 +1,33 @@
+version: '3'
+services:
+
+  db:
+    restart: always
+    image: postgres:9.6-alpine
+    shm_size: 256mb
+    networks:
+      - internal_network
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres"]
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
+
+  web:
+    image: delbertbeta/brando:${branch}
+    restart: always
+    networks:
+      - external_network
+      - internal_network
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --spider --proxy=off localhost:8080/health || exit 1"]
+    ports:
+      - "0.0.0.0:8080:8080"
+    depends_on:
+      - db
+    volumes:
+      - ./data:/data
+
+networks:
+  external_network:
+  internal_network:
+    internal: true
