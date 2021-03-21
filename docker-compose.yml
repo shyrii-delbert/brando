@@ -9,11 +9,14 @@ services:
       - internal_network
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "postgres"]
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRESQL_PASS}
+      POSTGRES_USER: ${POSTGRESQL_USER}
     volumes:
       - ./postgres:/var/lib/postgresql/data
 
   web:
-    image: delbertbeta/brando:${branch}
+    image: delbertbeta/brando:${BRANCH}
     restart: always
     networks:
       - external_network
