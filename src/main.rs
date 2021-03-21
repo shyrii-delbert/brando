@@ -5,7 +5,7 @@ async fn hello() -> impl Responder {
     HttpResponse::Ok().body("Hello world!")
 }
 
-#[post("/health")]
+#[get("/health")]
 async fn health_checker() -> impl Responder {
     HttpResponse::Ok().body("Health")
 }
