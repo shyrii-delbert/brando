@@ -60,4 +60,4 @@ jobs:
     - name: Deploy to server
       shell: bash
       id: deploy
-      run: curl ${{ secrets.DEPLOY_URL }}${{ needs.build.outputs.branch }}
+      run: curl "${{ secrets.DEPLOY_URL }}${{ needs.build.outputs.branch }}"
