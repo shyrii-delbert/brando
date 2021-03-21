@@ -26,7 +26,7 @@ services:
     healthcheck:
       test: ["CMD-SHELL", "wget -q --spider --proxy=off localhost:8080/health || exit 1"]
     ports:
-      - "0.0.0.0:8080:8080"
+      - "0.0.0.0:8080:${PORT}"
     depends_on:
       - db
     volumes:
